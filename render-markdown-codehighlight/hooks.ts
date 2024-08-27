@@ -91,6 +91,7 @@ const useHighlightCode = (element: HTMLElement | null) => {
       element.querySelectorAll('pre code').forEach((block) => {
         hljs.highlightElement(block as HTMLElement);
         (block as HTMLElement).style.backgroundColor = 'transparent';
+	(block as HTMLElement).style.padding = '0';
       });
     };
 
