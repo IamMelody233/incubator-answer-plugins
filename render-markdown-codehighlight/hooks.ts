@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import hljs from 'highlight.js';
 
-// 创建一个样式映射
+// Create a style mapping
 const themeStyles = {
   github: {
     light: () => import('highlight.js/styles/github.css?inline'),
@@ -83,36 +83,37 @@ const useHighlightCode = (element: HTMLElement | null) => {
       const themeMode = theme === 'dark' ? 'dark' : 'light';
       const selectedTheme = themeStyles[selectTheme] || themeStyles.default;
 
-      // 动态导入对应的样式
+      // Dynamically import the corresponding style
       const css = await selectedTheme[themeMode]();
       styleElement.innerHTML = css.default;
 
-      // 应用高亮
+      // Apply syntax highlighting
       element.querySelectorAll('pre code').forEach((block) => {
         hljs.highlightElement(block as HTMLElement);
+        (block as HTMLElement).style.backgroundColor = 'transparent';
       });
     };
 
-    // 获取并应用初始主题
+    // Get and apply the initial theme
     const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
     applyThemeCSS(currentTheme);
 
-    // 监听 DOM 变化（比如代码块内容变动）
+    // Observe DOM changes (e.g., code block content changes)
     const contentObserver = new MutationObserver(() => {
       const newTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
-      console.log('检测到代码内容变化，重新应用代码高亮, 当前主题:', newTheme);
+      console.log('Detected code content change, reapplying syntax highlighting, current theme:', newTheme);
       applyThemeCSS(newTheme);
     });
 
     contentObserver.observe(element, {
-      childList: true, // 监视子元素的变化
-      subtree: true,   // 监视整个子树
+      childList: true, // Observe changes to child elements
+      subtree: true,   // Observe the entire subtree
     });
 
-    // 监听主题变化
+    // Observe theme changes
     const themeObserver = new MutationObserver(() => {
       const newTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
-      console.log('检测到主题变化:', newTheme);
+      console.log('Detected theme change:', newTheme);
       applyThemeCSS(newTheme);
     });
 
