@@ -24,17 +24,6 @@
 	InfoDescription           = "plugin.codehighlight_markdown_render.backend.info.description"
 	ConfigCssFilteringTitle   = "plugin.codehighlight_markdown_render.backend.config.css_filtering.title"
 	ConfigCssFilteringLabel   = "plugin.codehighlight_markdown_render.backend.config.css_filtering.label"
-	ConfigCssFilteringA11y    = "plugin.codehighlight_markdown_render.backend.config.css_filtering.a11y"
-	ConfigCssFilteringGithub  = "plugin.codehighlight_markdown_render.backend.config.css_filtering.github"
-	ConfigCssFilteringDefault  = "plugin.codehighlight_markdown_render.backend.config.css_filtering.default"
-	ConfigCssFilteringAtom  = "plugin.codehighlight_markdown_render.backend.config.css_filtering.atom"
-	ConfigCssFilteringIsbl  = "plugin.codehighlight_markdown_render.backend.config.css_filtering.isbl"
-	ConfigCssFilteringKimbie  = "plugin.codehighlight_markdown_render.backend.config.css_filtering.kimbie"
-	ConfigCssFilteringNnfx  = "plugin.codehighlight_markdown_render.backend.config.css_filtering.nnfx"
-	ConfigCssFilteringPanda  = "plugin.codehighlight_markdown_render.backend.config.css_filtering.panda"
-	ConfigCssFilteringParaiso  = "plugin.codehighlight_markdown_render.backend.config.css_filtering.paraiso"
-	ConfigCssFilteringQtcreator  = "plugin.codehighlight_markdown_render.backend.config.css_filtering.qtcreator"
-	ConfigCssFilteringStackoverflow  = "plugin.codehighlight_markdown_render.backend.config.css_filtering.stackoverflow"
-	ConfigCssFilteringTokiyo  = "plugin.codehighlight_markdown_render.backend.config.css_filtering.tokiyo"
+	ConfigCssFilteringTitlePrefix = "plugin.codehighlight_markdown_render.backend.config."
  )
  

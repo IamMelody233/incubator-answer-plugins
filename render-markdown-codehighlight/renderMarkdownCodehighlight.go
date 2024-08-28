@@ -28,7 +28,6 @@
 	 "github.com/apache/incubator-answer-plugins/render-markdown-codehighlight/i18n"
 	 "github.com/apache/incubator-answer-plugins/util"
 	 "github.com/apache/incubator-answer/plugin"
-	 //"github.com/segmentfault/pacman/log"
  )
  
  //go:embed info.yaml
@@ -61,44 +60,40 @@
 		 Link:        info.Link,
 	 }
  }
- 
+
  func (r *Render) ConfigFields() []plugin.ConfigField {
-	 return []plugin.ConfigField{
-		 {
-			 Name:      "select_theme",
-			 Type:      plugin.ConfigTypeSelect,
-			 Title:     plugin.MakeTranslator(i18n.ConfigCssFilteringTitle),
-			 Required:  false,
-			 UIOptions: plugin.ConfigFieldUIOptions{},
-			 Value:     r.Config.SelectTheme,
-			 Options: []plugin.ConfigFieldOption{
-				 {Value: "default", Label: plugin.MakeTranslator(i18n.ConfigCssFilteringDefault)},
-				 {Value: "a11y", Label: plugin.MakeTranslator(i18n.ConfigCssFilteringA11y)},
-				 {Value: "github", Label: plugin.MakeTranslator(i18n.ConfigCssFilteringGithub)},
-				 {Value: "atom", Label: plugin.MakeTranslator(i18n.ConfigCssFilteringAtom)},
-				 {Value: "isbl", Label: plugin.MakeTranslator(i18n.ConfigCssFilteringIsbl)},
-				 {Value: "kimbie", Label: plugin.MakeTranslator(i18n.ConfigCssFilteringKimbie)},
-				 {Value: "nnfx", Label: plugin.MakeTranslator(i18n.ConfigCssFilteringNnfx)},
-				 {Value: "panda", Label: plugin.MakeTranslator(i18n.ConfigCssFilteringPanda)},
-				 {Value: "paraiso", Label: plugin.MakeTranslator(i18n.ConfigCssFilteringParaiso)},
-				 {Value: "qtcreator", Label: plugin.MakeTranslator(i18n.ConfigCssFilteringQtcreator)},
-				 {Value: "stackoverflow", Label: plugin.MakeTranslator(i18n.ConfigCssFilteringStackoverflow)},
-				 {Value: "tokiyo", Label: plugin.MakeTranslator(i18n.ConfigCssFilteringTokiyo)},
-			 },
-		 },
-	 }
- }
+	themeOptions := make([]plugin.ConfigFieldOption, len(ThemeList))
+
+	for i, theme := range ThemeList {
+		themeOptions[i] = plugin.ConfigFieldOption{
+			Value: theme,
+			Label: plugin.MakeTranslator(i18n.ConfigCssFilteringTitlePrefix + theme),
+		}
+	}
+
+	return []plugin.ConfigField{
+		{
+			Name:      "select_theme",
+			Type:      plugin.ConfigTypeSelect,
+			Title:     plugin.MakeTranslator(i18n.ConfigCssFilteringTitle),
+			Required:  false,
+			UIOptions: plugin.ConfigFieldUIOptions{},
+			Value:     r.Config.SelectTheme,
+			Options:   themeOptions,
+		},
+	}
+}
  
  func (r *Render) ConfigReceiver(config []byte) error {
 	 c := &RenderConfig{}
 	 _ = json.Unmarshal(config, c)
 	 r.Config = c
-	 log.Println("Received theme:", r.Config.SelectTheme)  // 打印接收到的配置
+	 log.Println("Received theme:", r.Config.SelectTheme) 
 	 return nil
  }
  
  func (r *Render) GetRenderConfig(ctx *gin.Context) (renderConfig *plugin.RenderConfig) {
-	     log.Println("Current theme:", r.Config.SelectTheme)  // 打印当前配置
+	     log.Println("Current theme:", r.Config.SelectTheme) 
 	     renderConfig = &plugin.RenderConfig{
 		 SelectTheme: r.Config.SelectTheme,
 	 }

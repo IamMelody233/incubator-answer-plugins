@@ -1,57 +1,7 @@
 import { useEffect, useState } from 'react';
 import hljs from 'highlight.js';
+import { themeStyles } from './themeStyles'
 
-// Create a style mapping
-const themeStyles = {
-  github: {
-    light: () => import('highlight.js/styles/github.css?inline'),
-    dark: () => import('highlight.js/styles/github-dark.css?inline'),
-  },
-  a11y: {
-    light: () => import('highlight.js/styles/a11y-light.css?inline'),
-    dark: () => import('highlight.js/styles/a11y-dark.css?inline'),
-  },
-  default: {
-    light: () => import('highlight.js/styles/default.css?inline'),
-    dark: () => import('highlight.js/styles/dark.css?inline'),
-  },
-  atom: {
-    light: () => import('highlight.js/styles/atom-one-light.css?inline'),
-    dark: () => import('highlight.js/styles/atom-one-dark.css?inline'),
-  },
-  isbl: {
-    light: () => import('highlight.js/styles/isbl-editor-light.css?inline'),
-    dark: () => import('highlight.js/styles/isbl-editor-dark.css?inline'),
-  },
-  kimbie: {
-    light: () => import('highlight.js/styles/kimbie-light.css?inline'),
-    dark: () => import('highlight.js/styles/kimbie-dark.css?inline'),
-  },
-  nnfx: {
-    light: () => import('highlight.js/styles/nnfx-light.css?inline'),
-    dark: () => import('highlight.js/styles/nnfx-dark.css?inline'),
-  },
-  panda: {
-    light: () => import('highlight.js/styles/panda-syntax-light.css?inline'),
-    dark: () => import('highlight.js/styles/panda-syntax-dark.css?inline'),
-  },
-  paraiso: {
-    light: () => import('highlight.js/styles/paraiso-light.css?inline'),
-    dark: () => import('highlight.js/styles/paraiso-dark.css?inline'),
-  },
-  qtcreator: {
-    light: () => import('highlight.js/styles/qtcreator-light.css?inline'),
-    dark: () => import('highlight.js/styles/qtcreator-dark.css?inline'),
-  },
-  stackoverflow: {
-    light: () => import('highlight.js/styles/stackoverflow-light.css?inline'),
-    dark: () => import('highlight.js/styles/stackoverflow-dark.css?inline'),
-  },
-  tokiyo: {
-    light: () => import('highlight.js/styles/tokyo-night-light.css?inline'),
-    dark: () => import('highlight.js/styles/tokyo-night-dark.css?inline'),
-  },
-};
 
 const useHighlightCode = (element: HTMLElement | null) => {
   const [selectTheme, setSelectTheme] = useState<string>('default');
@@ -91,7 +41,7 @@ const useHighlightCode = (element: HTMLElement | null) => {
       element.querySelectorAll('pre code').forEach((block) => {
         hljs.highlightElement(block as HTMLElement);
         (block as HTMLElement).style.backgroundColor = 'transparent';
-	(block as HTMLElement).style.padding = '0';
+        (block as HTMLElement).style.padding = '0';
       });
     };
 
