@@ -24,7 +24,7 @@
 	 "encoding/json"
      "log"
 	 "github.com/gin-gonic/gin"
- 
+     "strings" // Import the strings package
 	 "github.com/apache/incubator-answer-plugins/render-markdown-codehighlight/i18n"
 	 "github.com/apache/incubator-answer-plugins/util"
 	 "github.com/apache/incubator-answer/plugin"
@@ -65,8 +65,12 @@
 	themeOptions := make([]plugin.ConfigFieldOption, len(ThemeList))
 
 	for i, theme := range ThemeList {
+		// Split the theme string by the hyphen and take the first part
+		themeParts := strings.Split(theme, "-")
+		themeValue := themeParts[0]
+
 		themeOptions[i] = plugin.ConfigFieldOption{
-			Value: theme,
+			Value: themeValue, // Use the first part as the Value
 			Label: plugin.MakeTranslator(i18n.ConfigCssFilteringTitlePrefix + theme),
 		}
 	}
